@@ -22,12 +22,13 @@
 #include "batteryservice.h"
 #include "screenshotservice.h"
 #include "timeservice.h"
+#include "stepstracker.h"
 
 #include <QDBusMetaType>
 
 Application::Application(QDBusConnection bus, QObject *parent) : QObject(parent)
 {
-    mPath = "/";
+    /*mPath = "/";
 
     addService(new NotificationService(0, bus));
     addService(new WeatherService(1, bus));
@@ -39,7 +40,9 @@ Application::Application(QDBusConnection bus, QObject *parent) : QObject(parent)
     qDBusRegisterMetaType<InterfaceList>();
     qDBusRegisterMetaType<ManagedObjectList>();
 
-    bus.registerObject(mPath, this, QDBusConnection::ExportAllSlots | QDBusConnection::ExportAllProperties);
+    bus.registerObject(mPath, this, QDBusConnection::ExportAllSlots | QDBusConnection::ExportAllProperties);*/
+
+    new StepsTracker();
 }
 
 QDBusObjectPath Application::getPath()

@@ -25,32 +25,34 @@
 #include "application.h"
 #include "advertisement.h"
 #include "bluezmanager.h"
+#include "stepstracker.h"
 
 int main(int argc, char **argv)
 {
     QCoreApplication qcoreapp(argc, argv);
 
     QTranslator translator;
-    translator.load(QLocale(), "asteroid-btsyncd", ".", "/usr/share/translations", ".qm");
+    translator.load(QLocale(), "asteroid-fitnessd", ".", "/usr/share/translations", ".qm");
     qcoreapp.installTranslator(&translator);
 
-    if (!QDBusConnection::systemBus().isConnected()) {
+    /*if (!QDBusConnection::systemBus().isConnected()) {
         fprintf(stderr, "Cannot connect to the D-Bus system bus.\n");
         return 3;
     }
     if (!QDBusConnection::sessionBus().isConnected()) {
         fprintf(stderr, "Cannot connect to the D-Bus session bus.\n");
         return 2;
-    }
+    }*/
     /* if (!bus.registerService(SERVICE_NAME)) {
         fprintf(stderr, "%s\n",
                 qPrintable(QDBusConnection::systemBus().lastError().message()));
         exit(1);
     } */
 
-    Application app;
-    Advertisement advert;
-    BlueZManager bm(app.getPath(), advert.getPath());
+    //Application app;
+    new StepsTracker();
+    //Advertisement advert;
+    //BlueZManager bm(app.getPath(), advert.getPath());
 
     qcoreapp.exec();
     return 0;
